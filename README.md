@@ -2,7 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/sqlite3server.svg)](https://pypi.python.org/pypi/sqlite3server)
 
-A SQLite server in Python.
+A SQLite client/server Python wrapper.
 
 ### Usage
 
