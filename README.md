@@ -15,3 +15,6 @@ A SQLite client/server Python 3 wrapper.
         $ python3 examples/client.py 'SELECT * FROM EXAMPLE'
         [(0,), (1,), (2,)]
 
+### TODO
+
+Implement a proper multithreading model (see for example https://stackoverflow.com/questions/393554/python-sqlite3-and-concurrency) and then tests.
