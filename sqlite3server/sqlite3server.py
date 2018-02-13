@@ -64,16 +64,4 @@ class Server(socketserver.TCPServer):
     def __del__(self):
         self.conn.close()
 
-
-if __name__ == "__main__":
-    HOST, PORT = "localhost", 9999
-
-    # Create the server, binding to localhost on port 9999
-    #server = SocketServer.TCPServer((HOST, PORT), RequestHandler)
-    server = Server((HOST, PORT))
-
-    # Activate the server; this will keep running until you
-    # interrupt the program with Ctrl-C
-    server.serve_forever()
-
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
