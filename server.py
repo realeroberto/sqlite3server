@@ -24,10 +24,10 @@
 
 
 import pickle
-import SocketServer
+import socketserver
 import sqlite3
 
-class MyTCPHandler(SocketServer.BaseRequestHandler):
+class MyTCPHandler(socketserver.BaseRequestHandler):
     """
     The request handler class for our server.
 
@@ -45,11 +45,11 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
         self.data = self.request.recv(1024).strip()
 
         # execute the query
-        c.execute(self.data)
+        c.execute(self.data.decode('utf-8'))
         dataset = c.fetchall()
         self.request.sendall(pickle.dumps(dataset))
 
-        print "{} wrote:".format(self.client_address[0])
+        print("{} wrote:".format(self.client_address[0]))
 
         conn.close()
 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     HOST, PORT = "localhost", 9999
 
     # Create the server, binding to localhost on port 9999
-    server = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
+    server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)
 
     # Activate the server; this will keep running until you
     # interrupt the program with Ctrl-C
