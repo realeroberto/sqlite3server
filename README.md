@@ -2,7 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/sqlite3server.svg)](https://pypi.python.org/pypi/sqlite3server)
 
-A SQLite client/server Python wrapper.
+A SQLite client/server Python 3 wrapper.
 
 ### Usage
 
@@ -12,7 +12,7 @@ A SQLite client/server Python wrapper.
         sqlite> insert into test values (1);
         sqlite> insert into test values (2);
 
-        $ python server.py &
-        $ python client.py 'SELECT * FROM TEST'
+        $ python3 sqlite3server/sqlite3server.py &
+        $ python3 examples/client.py 'SELECT * FROM TEST'
         [(0,), (1,), (2,)]
 
