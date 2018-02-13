@@ -27,7 +27,10 @@ import pickle
 import socketserver
 import sqlite3
 
-class MyTCPHandler(socketserver.BaseRequestHandler):
+class RequestHandler(socketserver.BaseRequestHandler):
+    def setup(self):
+        self.cursor = self.server.cursor
+
     """
     The request handler class for our server.
 
@@ -37,28 +40,37 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
     """
 
     def handle(self):
-        # Connect to the database
-        conn = sqlite3.connect('example.db')
-        c = conn.cursor()
-
         # self.request is the TCP socket connected to the client
         self.data = self.request.recv(1024).strip()
 
         # execute the query
-        c.execute(self.data.decode('utf-8'))
-        dataset = c.fetchall()
+        self.cursor.execute(self.data.decode('utf-8'))
+        dataset = self.cursor.fetchall()
         self.request.sendall(pickle.dumps(dataset))
 
         print("{} wrote:".format(self.client_address[0]))
 
-        conn.close()
+
+class Server(socketserver.TCPServer):
+    def __init__(self, server_address):
+
+        # Connect to the database
+        self.conn = sqlite3.connect('example.db')
+        self.cursor = self.conn.cursor()
+
+        # Call parent constructor
+        super(Server, self).__init__(server_address, RequestHandler)
+
+    def __del__(self):
+        self.conn.close()
 
 
 if __name__ == "__main__":
     HOST, PORT = "localhost", 9999
 
     # Create the server, binding to localhost on port 9999
-    server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)
+    #server = SocketServer.TCPServer((HOST, PORT), RequestHandler)
+    server = Server((HOST, PORT))
 
     # Activate the server; this will keep running until you
     # interrupt the program with Ctrl-C
