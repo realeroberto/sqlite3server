@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name = 'sqlite3server',
-    version = '0.1.2',
+    version = '0.1.3',
     description = 'A SQLite client/server wrapper',
     packages = [ 'sqlite3server' ],
     author = 'Roberto Reale',
