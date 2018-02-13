@@ -17,4 +17,4 @@ A SQLite client/server Python 3 wrapper.
 
 ### TODO
 
-Implement a proper multithreading model (see for example https://stackoverflow.com/questions/393554/python-sqlite3-and-concurrency) and then tests.
+Implement a proper multithreading model (see for example https://stackoverflow.com/questions/393554/python-sqlite3-and-concurrency) and from there add tests.
