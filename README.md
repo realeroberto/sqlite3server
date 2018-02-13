@@ -8,14 +8,10 @@ A SQLite client/server Python 3 wrapper.
 
         $ pip3 install sqlite3server
 
-        $ sqlite3 example.db
-        sqlite> create table test(number id);
-        sqlite> insert into test values (0);
-        sqlite> insert into test values (1);
-        sqlite> insert into test values (2);
+        $ sqlite3 example.db < examples/example.sql
 
         $ sqlite3server &
 
-        $ python3 examples/client.py 'SELECT * FROM TEST'
+        $ python3 examples/client.py 'SELECT * FROM EXAMPLE'
         [(0,), (1,), (2,)]
 
