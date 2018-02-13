@@ -28,6 +28,11 @@ import socketserver
 import sqlite3
 
 class RequestHandler(socketserver.BaseRequestHandler):
+
+    def _execute(self, stmt):
+        self.cursor.execute(stmt)
+        return self.cursor.fetchall()
+
     def setup(self):
         self.cursor = self.server.cursor
 
@@ -44,8 +49,7 @@ class RequestHandler(socketserver.BaseRequestHandler):
         self.data = self.request.recv(1024).strip()
 
         # execute the query
-        self.cursor.execute(self.data.decode('utf-8'))
-        dataset = self.cursor.fetchall()
+        dataset = self._execute(self.data.decode('utf-8'))
         self.request.sendall(pickle.dumps(dataset))
 
         print("{} wrote:".format(self.client_address[0]))
