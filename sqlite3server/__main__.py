@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-# A small Python utility for synchronizing a local folder with a remote web
-# repository.
+# sqlite3server - A SQLite client/server wrapper.
 
 # The MIT License (MIT)
 # 
